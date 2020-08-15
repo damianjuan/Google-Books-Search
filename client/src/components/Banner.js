@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SimplePaper() {
+export default function Banner() {
     const classes = useStyles();
 
     return (
