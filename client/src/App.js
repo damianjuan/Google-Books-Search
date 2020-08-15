@@ -1,23 +1,29 @@
 import React from 'react';
-
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from './components/NavBar';
 import SearchForm from './components/SearchForm';
 import Banner from './components/Banner';
-import ResultsCard from './components/ResultsCard';
-import SavedCard from './components/SavedCard'
 import SearchResults from './pages/SearchResults';
 import SavedBooks from './pages/SavedBooks';
 
 function App() {
   return (
-    <div>
-      <NavBar />
-      <Banner />
-      <SearchForm />
-      <SearchResults />
-      <SavedBooks />
-    </div>
+    <Router>
+      <div>
+        <NavBar />
+        <Banner />
+        <Switch>
+          <Route exact path={["/", "/books"]}>
+            <SearchForm />
+            <SearchResults />
+          </Route>
+          <Route exact path="/books/saved">
+            <SavedBooks />
+          </Route>
+
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

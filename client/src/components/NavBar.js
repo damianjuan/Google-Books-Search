@@ -23,7 +23,7 @@ export default function NavBar() {
             <Toolbar>
                 <Typography variant="h6" className={classes.title}>Google Books</Typography>
                 <Button color="inherit" href="/">Search</Button>
-                <Button color="inherit" href="/saved">Saved</Button>
+                <Button color="inherit" href="/books/saved">Saved</Button>
             </Toolbar>
         </AppBar>
     );
