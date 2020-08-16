@@ -21,24 +21,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SearchResults() {
+export default function SearchResults(books) {
     const classes = useStyles();
-
+    const booksToRender = books.books;
     return (
         <div className={classes.root}>
             <Paper>
                 <Typography variant="h6" className={classes.title}>Results</Typography>
                 <Grid container spacing={4}>
-                    {/* will need to add a map her to give each result thier own grid with card add back  key={card}  */}
-                    <Grid item xs={12} sm={6} md={4}>
-                        <ResultsCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <ResultsCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4}>
-                        <ResultsCard />
-                    </Grid>
+                    {booksToRender.map(res =>
+                        <Grid item xs={12} sm={6} md={4}>
+                            <ResultsCard book={res} />
+                        </Grid>
+                    )}
+
                 </Grid>
             </Paper>
         </div>

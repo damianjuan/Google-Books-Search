@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import API from '../utils/API';
 
 const useStyles = makeStyles({
     root: {
@@ -14,37 +15,60 @@ const useStyles = makeStyles({
     },
 });
 
-export default function ResultsCard() {
+export default function ResultsCard(book) {
     const classes = useStyles();
+    // book data
+    const title = book.book.volumeInfo.title;
+    const authors = (book.book.volumeInfo.authors).join(', ');
+    const summary = book.book.volumeInfo.description;
+    const thumbnail = book.book.volumeInfo.imageLinks.thumbnail;
+    const linkURL = book.book.volumeInfo.canonicalVolumeLink;
+
+    // When the form is submitted, use the API.saveBook method to save the book data
+    // Then reload books from the database
+    function handleBookSave(event) {
+        event.preventDefault();
+
+        API.saveBook({
+            title: title,
+            authors: authors,
+            description: summary,
+            image: thumbnail,
+            link: linkURL
+        })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+
+    };
+
 
     return (
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    alt="Contemplative Reptile"
-                    height="140"
-                    image="https://via.placeholder.com/150"
-                    title="Contemplative Reptile"
+                    alt={title}
+                    height="auto"
+                    image={thumbnail}
+                    title={title}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-          </Typography>
+                        {title}
+                    </Typography>
                     <Typography variant="body" gutterBottom component="h4">
-                        Written by
-          </Typography>
+                        Written by {authors}
+                    </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-          </Typography>
+                        {summary}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" href={linkURL} target="_blank">
                     view
         </Button>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={handleBookSave}>
                     save
         </Button>
             </CardActions>

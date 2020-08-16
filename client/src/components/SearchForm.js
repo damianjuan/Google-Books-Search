@@ -93,7 +93,7 @@ export default function SearchForm() {
                     </form>
                 </Card>
             </Paper>
-            {books.length > 0 && <SearchResults />}
+            {books.length > 0 && <SearchResults books={books} />}
 
         </div>
     );
