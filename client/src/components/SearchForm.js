@@ -64,11 +64,12 @@ export default function SearchForm() {
     function handleFormSubmit(event) {
         event.preventDefault();
         if (formObject.value) {
-            console.log(formObject.value);
-            API.getBooks(formObject.value).then(res => { console.log(res) })
+            API.getBooks(formObject.value).then(res => setBooks(res.data.items))
+                .catch(err => console.log(err));
         }
-
     }
+
+
 
     return (
         <div className={classes.root}>
@@ -92,7 +93,7 @@ export default function SearchForm() {
                     </form>
                 </Card>
             </Paper>
-            <SearchResults />
+            {books.length > 0 && <SearchResults />}
 
         </div>
     );
