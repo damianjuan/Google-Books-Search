@@ -14,37 +14,48 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SavedCard() {
+export default function SavedCard({ book, deleteBook }) {
     const classes = useStyles();
+    // book data
+    const title = book.title;
+    const authors = book.authors
+    const summary = book.description;
+    const thumbnail = book.image;
+    const linkURL = book.link;
+    const bookID = book._id;
+
+
+
+
+
 
     return (
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    alt="Contemplative Reptile"
-                    height="140"
-                    image="https://via.placeholder.com/150"
-                    title="Contemplative Reptile"
+                    alt={title}
+                    height="auto"
+                    image={thumbnail}
+                    title={title}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-          </Typography>
+                        {title}
+                    </Typography>
                     <Typography variant="body" gutterBottom component="h4">
-                        Written by
-          </Typography>
+                        Written by {authors}
+                    </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-          </Typography>
+                        {summary}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" href={linkURL} target="_blank" >
                     view
         </Button>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={deleteBook()} >
                     delete
         </Button>
             </CardActions>

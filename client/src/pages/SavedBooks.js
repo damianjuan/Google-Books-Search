@@ -38,9 +38,19 @@ export default function SavedBooks() {
                 setBooks(res.data)
             )
             .catch(err => console.log(err))
-        console.log(books);
+
     }
 
+    // Deletes a book from the database with a given id, then reloads books from the db
+    function deleteBook() {
+
+        //const bookID = event.target
+        console.log("delete clicked!");
+
+        // API.deleteBook()
+        //     .then(res => loadBooks())
+        //     .catch(err => console.log(err));
+    }
 
     return (
         <div className={classes.root}>
@@ -49,9 +59,9 @@ export default function SavedBooks() {
                 <Grid container spacing={4}>
 
                     {books.length >= 1 ?
-                        books.map(res =>
+                        books.map((res, i) =>
                             <Grid item xs={12} sm={6} md={4}>
-                                <SavedCard /> {console.log(res)}
+                                <SavedCard book={res} deleteBook={deleteBook} />
                             </Grid>
                         )
                         :
