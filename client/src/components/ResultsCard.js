@@ -25,7 +25,6 @@ export default function ResultsCard(book) {
     const linkURL = book.book.volumeInfo.canonicalVolumeLink;
 
     // When the form is submitted, use the API.saveBook method to save the book data
-    // Then reload books from the database
     function handleBookSave(event) {
         event.preventDefault();
 
@@ -38,9 +37,7 @@ export default function ResultsCard(book) {
         })
             .then(res => console.log(res))
             .catch(err => console.log(err));
-
     };
-
 
     return (
         <Card className={classes.root}>
